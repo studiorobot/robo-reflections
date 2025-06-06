@@ -1,0 +1,123 @@
+---
+layout: default
+---
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta property="og:image" content="cover.jpg">
+  <title>robo reflections</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="icon" href="icon.png" type="image/png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Scope+One&family=Viaoda+Libre&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div class="reading-group">
+    <img src="header.jpeg" style="width: 100%; height: auto; margin-top:5px;">
+    {{ site.data.site.intro | markdownify | replace: '<a ', ' <a target="_blank" ' | remove: ' <p>' | remove: '</p>'}}
+      <div class="section">
+        <h2>format</h2>
+        {{ site.data.site.format | markdownify | replace: '<a ', ' <a target="_blank" ' | remove: ' <p>' | remove: '</p>
+          '}}
+      </div>
+      {% for semester in site.data.papers reversed %}
+      <div class="row">
+        <div>
+          <div style="padding-left:0px;">
+            <h2>{{ semester[0] }}</h2>
+          </div>
+          <div style="padding:0px;">
+            {% for paper in semester[1] reversed %}
+            <div class="paper-stuff" style="margin-bottom: 20px; display: flex; gap: 15px; align-items: flex-start;">
+              <div class="more-paper-stuff" style="flex-shrink: 0;">
+                {% if paper.img %}
+                <img class="regular-publication" src="assets/images/thumbnails/{{paper.img}}"
+                  alt="The first page of the paper" loading="lazy"
+                  style="width: 133px; height: 188px; border: 2px solid #556c80; border-radius: 4px;" />
+                {% else %}
+                <div style="width: 133px; height: 188px; background-color: #f0f0f0; border-radius: 4px;"></div>
+                {% endif %}
+              </div>
+              <div class="publication-details" style="flex: 1;">
+                {% if paper.title %}
+                <h3 style="font-size: 16px;" class="title">{{ paper.title }}</h3>
+                {% endif %}
+                {% if paper.authors %}
+                <p class="authors" style="font-size: 15px; margin-bottom:0px;">
+                  {{ paper.authors }}
+                  {% if paper.event %}
+                  <br><span style="font-size: 14px;">{{ paper.event }}</span>
+                  {% endif %}
+                </p>
+                {% endif %}
+                <div class="publication-links" style="display: flex; gap: 15px; flex-wrap: wrap;">
+                  {% if paper.project %}
+                  <span class="publication-link">
+                    Project: {{ paper.project }}
+                  </span>
+                  {% endif %}
+                  {% if paper.pdf %}
+                  <a href="publications/{{ paper.pdf }}" target="_blank" class="link-color publication-link">
+                    <i class="fa-regular fa-file"></i> PDF
+                  </a>
+                  {% endif %}
+                  {% if paper.doi %}
+                  <a href="{{ paper.doi }}" target="_blank" class="link-color publication-link">
+                    <i class="fas fa-external-link-alt"></i> DOI
+                  </a>
+                  {% endif %}
+                  {% if paper.video %}
+                  <a href="{{ paper.video }}" target="_blank" class="link-color publication-link">
+                    <i class="fa-solid fa-play"></i> Video
+                  </a>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      <div class="participants-section">
+        <h2>organizers</h2>
+        <div class="participants">
+          {% assign participants = site.data.organizers %}
+          {% for participant in participants %}
+          <div class="participant">
+            <img src="/assets/images/organizers/{{participant.img }}" alt="{{ participant.name }}"
+              class="participant-image">
+            <h3 class="participant-name">
+              {{ participant.name }}
+              {% if participant.in %}
+              <a href="{{ participant.in }}" target="_blank" class="icon-link">
+                <i class="fab fa-linkedin" title="LinkedIn"></i>
+              </a>
+              {% elsif participant.web %}
+              <a href="{{ participant.web }}" target="_blank" class="icon-link">
+                <i class="fas fa-globe" title="Website"></i>
+              </a>
+              {% endif %}
+              {% if participant.scholar %}
+              <a href="{{ participant.scholar }}" target="_blank" class="icon-link">
+                <i class="fab fa-google-scholar" title="Google Scholar"></i>
+              </a>
+              {% endif %}
+            </h3>
+            <p class="participant-institution">{{ participant.role }}<br>{{ participant.inst }}</p>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+  </div>
+</body>
+<style>
+
+</style>
+</html>
