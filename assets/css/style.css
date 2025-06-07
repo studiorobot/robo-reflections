@@ -223,7 +223,7 @@ h2 {
 
 .participants {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   width: 100%;
   max-width: 100%;
@@ -305,11 +305,7 @@ h2 {
   }
 }
 
-@media only screen and (max-width: 925px) {
-  .participants {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
+
 
 @media only screen and (max-width: 768px) {
   .section-images {
@@ -388,10 +384,11 @@ h2 {
   }
 }
 
-  .publication-link{
+.publication-link {
   text-decoration: none !important;
 }
-.publication-link:hover{
+
+.publication-link:hover {
   text-decoration: underline !important;
 }
 
@@ -405,10 +402,12 @@ h2 {
 @media (max-width: 600px) {
   .paper-stuff {
     flex-direction: column;
-    align-items: center; /* Center align image and text */
+    align-items: center;
+    /* Center align image and text */
   }
 
   .publication-details {
-    width: 100%; /* Make text container full width on mobile */
+    width: 100%;
+    /* Make text container full width on mobile */
   }
 }

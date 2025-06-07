@@ -10,18 +10,17 @@
   img: cm.jpeg
   web: https://chrismavrogiannis.com/
 
-
 - name: Lionel Robert
-  role: Full Professor in Robotics and Information
+  role: Full Professor of Robotics and Information
   inst: University of Michigan
   img: lr.jpeg
   web: https://sites.google.com/umich.edu/lionelrobert/
 
 - name: Leia Stirling
-  role: Full Professor of Robotics and Industrial and Operational Engineering
+  role: Full Professor of Robotics and<br>Industrial and Operational Engineering
   inst: University of Michigan
   img: ls.jpeg
-  in: https://www.linkedin.com/in/leia-stirling-2530a321/
+  web: https://stirling.engin.umich.edu/
 
 - name: Long-Jing Hsu
   role: Postdoctoral Researcher in Robotics
