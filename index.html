@@ -62,105 +62,110 @@ layout: default
         }
       }
     </style>
-    {{ site.data.site.intro | markdownify | replace: '<a', '<a target="_blank"' | remove: '<p>' | remove: '</p>'}}
-      <h2>Format</h2>
-      {{ site.data.site.format | markdownify | replace: '<a', '<a target="_blank"' | remove: '<p>' | remove: '</p>'}}
-        {% for semester in site.data.papers reversed %}
-        <div class="row">
-          <div>
-            <div style="padding-left:0px;">
-              <h2>{{ semester[0] }}</h2>
-            </div>
-            <div style="padding:0px;">
-              {% for paper in semester[1] reversed %}
-              <div class="paper-stuff" style="margin-bottom: 0px; display: flex; gap: 15px; align-items: flex-start;">
-                <div class="more-paper-stuff" style="flex-shrink: 0;">
-                  {% if paper.img %}
-                  <img class="regular-publication" src="assets/images/thumbnails/{{paper.img}}"
-                    alt="The first page of the paper" loading="lazy"
-                    style="width: 133px; height: 188px; border: 2px solid #556c80; border-radius: 4px;" />
-                  {% else %}
-                  <div style="width: 133px; height: 188px; background-color: #f0f0f0; border-radius: 4px;"></div>
+    {{ site.data.site.intro | markdownify | replace: '<a', '<a target="_blank"' | remove: '<p>' | remove: '</p>' }} <h2>
+      Format</h2>
+      {{ site.data.site.format | markdownify | replace: '<a', '<a target="_blank"' | remove: '<p>' | remove: '</p>' }}
+        {% for semester in site.data.papers reversed %} <div class="row">
+        <div>
+          <div style="padding-left:0px;">
+            <h2>{{ semester[0] }}</h2>
+          </div>
+          <div style="padding:0px;">
+            {% for paper in semester[1] reversed %}
+            <div class="paper-stuff" style="margin-bottom: 0px; display: flex; gap: 15px; align-items: flex-start;">
+              <div class="more-paper-stuff" style="flex-shrink: 0;">
+                {% if paper.img %}
+                <img class="regular-publication" src="assets/images/thumbnails/{{paper.img}}"
+                  alt="The first page of the paper" loading="lazy"
+                  style="width: 133px; height: 188px; border: 2px solid #556c80; border-radius: 4px;" />
+                {% else %}
+                <div style="width: 133px; height: 188px; background-color: #f0f0f0; border-radius: 4px;"></div>
+                {% endif %}
+              </div>
+              <div class="publication-details" style="flex: 1;">
+                {% if paper.title %}
+                <h3 style="font-size: 16px;" class="title">{{ paper.title }}</h3>
+                {% endif %}
+                {% if paper.authors %}
+                <p class="authors" style="font-size: 15px; margin-bottom:0px;">
+                  {{ paper.authors }}
+                  {% if paper.event %}
+                  <br><span style="font-size: 14px;">{{ paper.event }}</span>
                   {% endif %}
-                </div>
-                <div class="publication-details" style="flex: 1;">
-                  {% if paper.title %}
-                  <h3 style="font-size: 16px;" class="title">{{ paper.title }}</h3>
+                </p>
+                {% endif %}
+                <div class="publication-links" style="display: flex; gap: 15px; flex-wrap: wrap;">
+                  {% if paper.project %}
+                  <span class="publication-link">
+                    Project: {{ paper.project }}
+                  </span>
                   {% endif %}
-                  {% if paper.authors %}
-                  <p class="authors" style="font-size: 15px; margin-bottom:0px;">
-                    {{ paper.authors }}
-                    {% if paper.event %}
-                    <br><span style="font-size: 14px;">{{ paper.event }}</span>
-                    {% endif %}
-                  </p>
+                  {% if paper.pdf %}
+                  <a href="assets/pdfs/{{ paper.pdf }}" target="_blank" class="link-color publication-link">
+                    <i class="fa-regular fa-file"></i> PDF
+                  </a>
                   {% endif %}
-                  <div class="publication-links" style="display: flex; gap: 15px; flex-wrap: wrap;">
-                    {% if paper.project %}
-                    <span class="publication-link">
-                      Project: {{ paper.project }}
-                    </span>
-                    {% endif %}
-                    {% if paper.pdf %}
-                    <a href="assets/pdfs/{{ paper.pdf }}" target="_blank" class="link-color publication-link">
-                      <i class="fa-regular fa-file"></i> PDF
-                    </a>
-                    {% endif %}
-                    {% if paper.doi %}
-                    <a href="{{ paper.doi }}" target="_blank" class="link-color publication-link">
-                      <i class="fas fa-external-link-alt"></i> DOI
-                    </a>
-                    {% endif %}
-                    {% if paper.video %}
-                    <a href="{{ paper.video }}" target="_blank" class="link-color publication-link">
-                      <i class="fa-solid fa-play"></i> Video
-                    </a>
-                    {% endif %}
-                  </div>
+                  {% if paper.doi %}
+                  <a href="{{ paper.doi }}" target="_blank" class="link-color publication-link">
+                    <i class="fas fa-external-link-alt"></i> DOI
+                  </a>
+                  {% endif %}
+                  {% if paper.video %}
+                  <a href="{{ paper.video }}" target="_blank" class="link-color publication-link">
+                    <i class="fa-solid fa-play"></i> Video
+                  </a>
+                  {% endif %}
                 </div>
               </div>
-              {% endfor %}
-            </div>
-          </div>
-        </div>
-        {% endfor %}
-        <div class="participants-section">
-          <h2>Organizers</h2>
-          <div class="participants">
-            {% assign participants = site.data.organizers %}
-            {% for participant in participants %}
-            <div class="participant">
-              <img src="assets/images/organizers/{{participant.img }}" alt="{{ participant.name }}"
-                class="participant-image">
-              <h3 class="participant-name">
-                {{ participant.name }}
-                {% if participant.in %}
-                <a href="{{ participant.in }}" target="_blank" class="icon-link">
-                  <i class="fab fa-linkedin" title="LinkedIn"></i>
-                </a>
-                {% elsif participant.web %}
-                <a href="{{ participant.web }}" target="_blank" class="icon-link">
-                  <i class="fas fa-globe" title="Website"></i>
-                </a>
-                {% endif %}
-                {% if participant.scholar %}
-                <a href="{{ participant.scholar }}" target="_blank" class="icon-link">
-                  <i class="fab fa-google-scholar" title="Google Scholar"></i>
-                </a>
-                {% endif %}
-              </h3>
-              <p class="participant-institution">{{ participant.role }}<br>{{ participant.inst }}</p>
             </div>
             {% endfor %}
           </div>
         </div>
-        <div class="section">
-          <h2>Contact</h2>
-          {{ site.data.site.contact | markdownify | replace: '<a', '<a target="_blank"' | remove: '<p>' | remove: '</p>'}}
-        </div>
-        <footer style="margin-top:20px; padding-bottom:20px;"><a href="https://robotics.umich.edu/" target="_blank"><img src="assets/images/robotics.png"
-              style="width:200px;"></a>
-        </footer>
+  </div>
+  {% endfor %}
+  <div class="participants-section">
+    {% assign sections = site.data.people %}
+    {% for section in sections %}
+    {% assign section_name = section[0] %}
+    {% assign people = section[1] %}
+
+    <h2>{{ section_name }}</h2>
+    <div class="participants">
+      {% for participant in people %}
+      <div class="participant">
+        <img src="assets/images/organizers/{{ participant.img }}" alt="{{ participant.name }}"
+          class="participant-image">
+        <h3 class="participant-name">
+          {{ participant.name }}
+          {% if participant.in %}
+          <a href="{{ participant.in }}" target="_blank" class="icon-link">
+            <i class="fab fa-linkedin" title="LinkedIn"></i>
+          </a>
+          {% elsif participant.web %}
+          <a href="{{ participant.web }}" target="_blank" class="icon-link">
+            <i class="fas fa-globe" title="Website"></i>
+          </a>
+          {% endif %}
+          {% if participant.scholar %}
+          <a href="{{ participant.scholar }}" target="_blank" class="icon-link">
+            <i class="fab fa-google-scholar" title="Google Scholar"></i>
+          </a>
+          {% endif %}
+        </h3>
+        <p class="participant-institution">{{ participant.role }}<br>{{ participant.inst }}</p>
+      </div>
+      {% endfor %}
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="section">
+    <h2>Contact</h2>
+    {{ site.data.site.contact | markdownify | replace: '<a', '<a target="_blank"' | remove: '<p>' | remove: '</p>' }}
+      </div>
+      <footer style="margin-top:20px; padding-bottom:20px;"><a href="https://robotics.umich.edu/" target="_blank"><img
+            src="assets/images/robotics.png" style="width:200px;"></a>
+      </footer>
   </div>
 </body>
 <style>
