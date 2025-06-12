@@ -34,7 +34,7 @@ layout: default
           display: flex;
           flex-direction: column;
         }
-
+        
         .header-title {
           position: static !important;
           order: 2;
@@ -61,6 +61,11 @@ layout: default
           margin: 0 0 0 auto !important;
         }
       }
+      @media(max-width:600px){
+        .publication-details{
+          margin-top: 0px !important;
+        }
+      }
     </style>
     {{ site.data.site.intro | markdownify | replace: '<a', '<a target="_blank"' | remove: '<p>' | remove: '</p>' }} <h2>
       Format</h2>
@@ -74,6 +79,9 @@ layout: default
             {% for paper in semester[1] reversed %}
             <div class="paper-stuff" style="margin-bottom: 0px; display: flex; gap: 15px; align-items: flex-start;">
               <div class="more-paper-stuff" style="flex-shrink: 0;">
+                {% if paper.date %}
+                <h4 style="font-weight: bold; padding-left: 3px;">{{ paper.date }}</h4>
+                {% endif %}
                 {% if paper.img %}
                 <img class="regular-publication" src="assets/images/thumbnails/{{paper.img}}"
                   alt="The first page of the paper" loading="lazy"
@@ -82,7 +90,7 @@ layout: default
                 <div style="width: 133px; height: 188px; background-color: #f0f0f0; border-radius: 4px;"></div>
                 {% endif %}
               </div>
-              <div class="publication-details" style="flex: 1;">
+              <div class="publication-details" style="flex: 1;margin-top: 24px;">
                 {% if paper.title %}
                 <h3 style="font-size: 16px;" class="title">{{ paper.title }}</h3>
                 {% endif %}
